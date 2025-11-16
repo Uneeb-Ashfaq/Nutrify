@@ -12,6 +12,7 @@ public class GUI {
         frame = new JFrame();
         
         frame.setSize(550, 600);
+        frame.setResizable(false); // ← ADD THIS LINE
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("CalorieAppTracker");
         frame.setLocationRelativeTo(null); // Center the window
@@ -149,51 +150,42 @@ public class GUI {
                 
                 // Check if empty
                 if (firstNameInput.isEmpty() || lastNameInput.isEmpty() || ageInput.isEmpty() || 
-                    heightInput.isEmpty() || weightInput.isEmpty()) {
+                    heightInput.isEmpty() || weightInput.isEmpty() || (genderInput.equals("Select") || activityInput.equals("Select"))) {
                     JOptionPane.showMessageDialog(frame, "Please fill in all fields!", 
                         "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                
-                // Check dropdowns
-                if (genderInput.equals("Select") || activityInput.equals("Select")) {
-                    JOptionPane.showMessageDialog(frame, "Please select gender and activity level!", 
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                
-                // Convert to proper types
-                int ageValue = Integer.parseInt(ageInput);
-                double heightValue = Double.parseDouble(heightInput);
-                double weightValue = Double.parseDouble(weightInput);
-                
-                String fullName = firstNameInput + " " + lastNameInput;
-                
-                // Your Profile class uses public variables, so set them directly:
-                userProfile.name = firstNameInput + " " + lastNameInput;
-                userProfile.age = ageValue;
-                userProfile.gender = genderInput.equals("Male") ? "M" : "F";
-                userProfile.height = heightValue;
-                userProfile.weight = weightValue;
-                userProfile.activityLevel = activityInput;
-                
-                JOptionPane.showMessageDialog(frame, 
-                    "Profile saved successfully!\n\n" +
-                    "Name: " + userProfile.name + "\n" +
-                    "Age: " + userProfile.age + "\n" +
-                    "Gender: " + userProfile.gender + "\n" +
-                    "Height: " + userProfile.height + " cm\n" +
-                    "Weight: " + userProfile.weight + " kg\n" +
-                    "Activity Level: " + userProfile.activityLevel,
-                    "Success", JOptionPane.INFORMATION_MESSAGE);
-                
-                // Go to next screen
-                showGoalScreen();
-            }
-        });
-        
+
+          try {
+            int age = Integer.parseInt(ageInput);
+            double height = Double.parseDouble(heightInput);
+            double weight = Double.parseDouble(weightInput);
+
+            // Save values into your Profile object
+            userProfile.setFirstName(firstNameInput);
+            userProfile.setLastName(lastNameInput);
+            userProfile.setAge(age);
+            userProfile.setGender(genderInput);
+            userProfile.setHeight(height);
+            userProfile.setWeight(weight);
+            userProfile.setActivityLevel(activityInput);
+
+            JOptionPane.showMessageDialog(frame,
+                "Profile saved for " + userProfile.getFirstName() + " " + userProfile.getLastName(),
+                "Success",
+                JOptionPane.INFORMATION_MESSAGE);
+
+             showGoalScreen();
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(frame,
+                "Age, height, and weight must be valid numbers.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+});             
+       
         panel.add(continueButton);
-        
         frame.getContentPane().removeAll();
         frame.add(panel);
         frame.revalidate();
@@ -230,6 +222,10 @@ public class GUI {
         JComboBox<String> goalCombo = new JComboBox<>(goalOptions);
         goalCombo.setBounds(200, 110, 280, 30);
         goalCombo.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        goalCombo.setBackground(Color.WHITE);
+        goalCombo.setOpaque(true);
+        goalCombo.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
+
         
         panel.add(goalCombo);
         
