@@ -1,56 +1,110 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+// ---------------------------------------------------------------------
 
 public class Goal {
-
+    // ==========================
+    // Private Attributes
+    // ==========================
     private String goalType;           // Lose, Gain, Maintain
     private double targetWeight;       // Target weight in kg
     private int months;                // Number of months to reach goal
     private double dailyCalorieGoal;   // Daily calorie goal calculated
     private List<Double> dailyCalories; // Tracks planned daily calorie intake
 
-    // Parameterized constructor
+    // ==========================
+    // Constructors
+    // ==========================
+    
+    /**
+     * Default constructor
+     */
+    public Goal() {
+        this.goalType = "";
+        this.targetWeight = 0.0;
+        this.months = 0;
+        this.dailyCalorieGoal = 0.0;
+        this.dailyCalories = new ArrayList<>();
+    }
+
+    /**
+     * Parameterized constructor
+     * 
+     * @param goalType
+     * @param targetWeight
+     * @param months
+     */
     public Goal(String goalType, double targetWeight, int months) {
         this.goalType = goalType;
         this.targetWeight = targetWeight;
         this.months = months;
+        this.dailyCalorieGoal = 0.0;
         this.dailyCalories = new ArrayList<>();
     }
 
-    // Default constructor
-    public Goal() {
-        this.dailyCalories = new ArrayList<>();
+    // ==========================
+    // Getters and Setters
+    // ==========================
+    
+    public String getGoalType() {
+        return this.goalType;
     }
 
-    // Getters
-    public String getGoalType() { return goalType; }
-    public double getTargetWeight() { return targetWeight; }
-    public int getMonths() { return months; }
-    public double getDailyCalorieGoal() { return dailyCalorieGoal; }
-    public List<Double> getDailyCalories() { return dailyCalories; }
+    public void setGoalType(String goalType) {
+        this.goalType = goalType;
+    }
 
-    // Setters
-    public void setGoalType(String goalType) { this.goalType = goalType; }
-    public void setTargetWeight(double targetWeight) { this.targetWeight = targetWeight; }
-    public void setMonths(int months) { this.months = months; }
-    public void setDailyCalorieGoal(double dailyCalorieGoal) { this.dailyCalorieGoal = dailyCalorieGoal; }
+    public double getTargetWeight() {
+        return this.targetWeight;
+    }
+
+    public void setTargetWeight(double targetWeight) {
+        this.targetWeight = targetWeight;
+    }
+
+    public int getMonths() {
+        return this.months;
+    }
+
+    public void setMonths(int months) {
+        this.months = months;
+    }
+
+    public double getDailyCalorieGoal() {
+        return this.dailyCalorieGoal;
+    }
+
+    public void setDailyCalorieGoal(double dailyCalorieGoal) {
+        this.dailyCalorieGoal = dailyCalorieGoal;
+    }
+
+    public List<Double> getDailyCalories() {
+        return this.dailyCalories;
+    }
+
+    // ==========================
+    // Methods
+    // ==========================
 
     /**
-     * Calculate daily calories using Profile's weight and activity level
+     * Calculate maintenance calories using Profile's weight and activity level
+     * 
+     * @param profile User's profile with physical stats
+     * @return Daily maintenance calories
      */
     private double calculateMaintenanceCalories(Profile profile) {
         double bmr;
-        // BMR formula
-        if (profile.gender.equalsIgnoreCase("M")) {
-            bmr = 10 * profile.weight + 6.25 * profile.height - 5 * profile.age + 5;
+        
+        // BMR formula (Mifflin-St Jeor)
+        if (profile.getGender().equalsIgnoreCase("Male")) {
+            bmr = 10 * profile.getWeight() + 6.25 * profile.getHeight() - 5 * profile.getAge() + 5;
         } else {
-            bmr = 10 * profile.weight + 6.25 * profile.height - 5 * profile.age - 161;
+            bmr = 10 * profile.getWeight() + 6.25 * profile.getHeight() - 5 * profile.getAge() - 161;
         }
 
         // Activity multiplier
         double multiplier = 1.0;
-        switch (profile.activityLevel.toLowerCase()) {
+        switch (profile.getActivityLevel().toLowerCase()) {
             case "light":
                 multiplier = 1.375;
                 break;
@@ -63,6 +117,9 @@ public class Goal {
             case "very active":
                 multiplier = 1.9;
                 break;
+            default:
+                multiplier = 1.2; 
+                break;
         }
 
         return bmr * multiplier;
@@ -70,13 +127,15 @@ public class Goal {
 
     /**
      * Calculate daily calorie goal based on weight difference and time frame
+     * 
+     * @param profile User's profile
      */
     public void calculateDailyCalories(Profile profile) {
-        double currentWeight = profile.weight;
-        double weightDiff = targetWeight - currentWeight; // +ve gain, -ve loss
+        double currentWeight = profile.getWeight();
+        double weightDiff = targetWeight - currentWeight; // +ve = gain, -ve = loss
         int totalDays = months * 30;
 
-        double totalCaloriesChange = weightDiff * 7700; // 1 kg ~ 7700 kcal
+        double totalCaloriesChange = weightDiff * 7700; // 1 kg ≈ 7700 kcal
         double dailyAdjustment = totalCaloriesChange / totalDays;
 
         double maintenanceCalories = calculateMaintenanceCalories(profile);
@@ -89,42 +148,17 @@ public class Goal {
         }
     }
 
-    /**
-     * Ask user for goal details
-     */
-    public void createGoalFromInput(Profile profile) {
-        Scanner scanner = new Scanner(System.in);
+    // ==========================
+    // toString
+    // ==========================
 
-        System.out.print("Do you want to Lose, Maintain, or Gain weight? ");
-        goalType = scanner.nextLine().trim();
-
-        System.out.print("Enter your target weight in kg: ");
-        targetWeight = scanner.nextDouble();
-
-        System.out.print("In how many months do you want to reach this goal? ");
-        months = scanner.nextInt();
-
-        calculateDailyCalories(profile);
-
-        // Display guidance
-        System.out.println("\n--- Goal Summary ---");
-        System.out.println("Goal Type: " + goalType);
-        System.out.printf("Target Weight: %.1f kg%n", targetWeight);
-        System.out.println("Time Frame: " + months + " months");
-        System.out.printf("Daily Calorie Target: %.0f kcal/day%n", dailyCalorieGoal);
-        System.out.println("Note: A healthy weight change is about 0.5 kg per week. This plan is designed to be safe and sustainable.");
-    }
-
-    /**
-     * Display first 7 days of daily calorie plan
-     */
-    public void displayDailyPlan() {
-        System.out.println("\n--- Daily Calorie Plan (first 7 days) ---");
-        for (int i = 0; i < Math.min(7, dailyCalories.size()); i++) {
-            System.out.printf("Day %d: %.0f kcal%n", i + 1, dailyCalories.get(i));
-        }
-        if (dailyCalories.size() > 7) {
-            System.out.println("... remaining days follow the same target.");
-        }
+    @Override
+    public String toString() {
+        String string = "";
+        string += "Goal Type: " + this.goalType + "\n";
+        string += "Target Weight: " + this.targetWeight + " kg\n";
+        string += "Time Frame: " + this.months + " months\n";
+        string += "Daily Calorie Goal: " + this.dailyCalorieGoal + " kcal\n";
+        return string;
     }
 }

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 // ---------------------------------------------------------------------
 
 public class GUI {
@@ -8,6 +10,7 @@ public class GUI {
     private JFrame frame;
     private Profile userProfile;
     private Goal userGoal;  
+    private ArrayList<Meal> meals;
 
 // ---------------------------------------------------------------------
 
@@ -242,11 +245,27 @@ public class GUI {
                 userProfile.setHeight(heightValue);
                 userProfile.setWeight(weightValue);
                 userProfile.setActivityLevel(activityInput);
-
+                
                 JOptionPane.showMessageDialog(frame,
-                    "Profile saved for " + userProfile.getFirstName() + " " + userProfile.getLastName(),
-                    "Success",
-                    JOptionPane.INFORMATION_MESSAGE);
+                    String.format(
+                        "Profile Saved!\n\n" +
+                        "Name: %s %s\n" +
+                        "Age: %d\n" +
+                        "Gender: %s\n" +
+                        "Height: %.1f cm\n" +
+                        "Weight: %.1f kg\n" +
+                        "Activity Level: %s",
+                        userProfile.getFirstName(),
+                        userProfile.getLastName(),
+                        userProfile.getAge(),
+                        userProfile.getGender(),
+                        userProfile.getHeight(),
+                        userProfile.getWeight(),
+                        userProfile.getActivityLevel()
+                    ),
+                    "Profile Summary",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
 
                 showGoalScreen();
 
@@ -279,10 +298,6 @@ private void showGoalScreen() {
     int centerX = screenSize.width / 2;
     int startY = 80;
     
-    frame.getContentPane().removeAll();
-    frame.add(panel);
-    frame.revalidate();
-    frame.repaint();
     
     // HEADER
     JLabel headerText = new JLabel("Set Your Goal");
@@ -370,10 +385,6 @@ private void showGoalScreen() {
                 int months = Integer.parseInt(timeFrameInput);
                 double targetWeightValue = Double.parseDouble(targetWeightInput);
 
-                userGoal.setGoalType(goalType);
-                userGoal.setTargetWeight(targetWeightValue);
-                userGoal.setMonths(months);
-                userGoal.calculateDailyCalories(userProfile);
 
            if (targetWeightValue <= 0 || months <= 0) {
                 JOptionPane.showMessageDialog(frame, 
@@ -381,14 +392,18 @@ private void showGoalScreen() {
                     "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            showHomePage();
+            userGoal.setGoalType(goalType);
+            userGoal.setTargetWeight(targetWeightValue);
+            userGoal.setMonths(months);
+            userGoal.calculateDailyCalories(userProfile);
 
             JOptionPane.showMessageDialog(frame,
-                String.format("Goal set!\nType: %s\nTarget: %.1f kg\nTime: %d months", 
-                    goalType, targetWeightValue, months),
+                 String.format("Goal set!\n\nType: %s weight\nTarget: %.1f kg in %d months\n\nDaily Calorie Target: %.0f kcal", 
+                    goalType, targetWeightValue, months, userGoal.getDailyCalorieGoal()),
                 "Success",
                 JOptionPane.INFORMATION_MESSAGE);
-            
+            showHomePage();
+
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(frame,
