@@ -123,7 +123,8 @@ public class AddMealPanel extends JPanel {
         });
 
         // Action → go back to home page
-        cancelButton.addActionListener(e -> app.showIntroPanel());
+        cancelButton.addActionListener(e -> app.showDashboard());
+        continueButton.addActionListener(e -> app.showDashboard());
 
         add(cancelButton);
         add(continueButton);

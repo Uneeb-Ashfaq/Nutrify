@@ -17,6 +17,8 @@ public class GUI {
     private ProfilePanel profilePanel;
     private GoalPanel goalPanel;
     private AddMealPanel addMealPanel;
+    private DashboardPanel dashboardPanel;
+
     // ---------------------------------------------------------------------
 
     public GUI() {
@@ -34,6 +36,8 @@ public class GUI {
         profilePanel = new ProfilePanel(this);
         goalPanel = new GoalPanel(this);
         addMealPanel = new AddMealPanel(this);
+        dashboardPanel = new DashboardPanel(this);
+
 
 
         showIntroPanel();
@@ -42,6 +46,10 @@ public class GUI {
 
     public void showIntroPanel() {
         setContent(introPanel);
+    }
+
+    public void showDashboard() {
+    setContent(dashboardPanel);
     }
 
     public void showProfilePanel() {

@@ -20,12 +20,19 @@ public class GoalPanel extends JPanel {
         int centerX = screenSize.width / 2;
         int startY = 80;
 
+        JLabel stepLabel = new JLabel("Step 2 of 2");
+        stepLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+        stepLabel.setForeground(new Color(46, 204, 113));
+        stepLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        stepLabel.setBounds(0, startY - 20, screenSize.width, 20);
+        add(stepLabel);
+
         // HEADER
         JLabel headerText = new JLabel("Set Your Goal");
         headerText.setFont(new Font("SansSerif", Font.BOLD, 40));
         headerText.setForeground(new Color(50, 50, 50));
         headerText.setHorizontalAlignment(SwingConstants.CENTER);
-        headerText.setBounds(centerX - 300, startY, 600, 50);
+        headerText.setBounds(0, startY, screenSize.width, 50);
         add(headerText);
 
         int labelX = centerX - 400;
@@ -123,7 +130,7 @@ public class GoalPanel extends JPanel {
                                     goalType, targetWeightValue, months, userGoal.getDailyCalorieGoal()),
                             "Success",
                             JOptionPane.INFORMATION_MESSAGE);
-                    app.showAddMealPage();
+                            app.showDashboard();        
 
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(GoalPanel.this,
