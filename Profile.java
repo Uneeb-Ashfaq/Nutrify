@@ -41,9 +41,7 @@ public class Profile {
      * @param weight
      * @param activityLevel
      */
-    public Profile(String firstName, String lastName, int age, String gender,
-                   double height, double weight, String activityLevel) {
-
+    public Profile(String firstName, String lastName, int age, String gender, double height, double weight, String activityLevel) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -125,19 +123,6 @@ public class Profile {
         return weight / (heightMeters * heightMeters);
     }
 
-    // ==========================
-    // toString
-    // ==========================
-
-    @Override
-    public String toString() {
-        String string = "";
-        string += "Profile: " + this.firstName + " " + this.lastName + "\n";
-        string += "Age: " + this.age + " | Gender: " + this.gender + "\n";
-        string += "Height: " + this.height + " cm | Weight: " + this.weight + " kg\n";
-        string += "Activity Level: " + this.activityLevel + "\n";
-        return string;
-    }
 
 }
 

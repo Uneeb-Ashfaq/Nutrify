@@ -62,7 +62,6 @@ public class IntroPanel extends JPanel {
             public void mouseEntered(MouseEvent e) {
                 continueButton.setBackground(new Color(80, 180, 130));
             }
-
             public void mouseExited(MouseEvent e) {
                 continueButton.setBackground(new Color(100, 200, 150));
             }
