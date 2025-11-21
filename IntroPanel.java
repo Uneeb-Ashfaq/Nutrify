@@ -2,14 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
 public class IntroPanel extends JPanel {
 
     private GUI app;
 
     public IntroPanel(GUI app) {
         this.app = app;
-
 
         setLayout(null);
         setBackground(new Color(245, 245, 245)); // Light gray background
@@ -42,13 +40,14 @@ public class IntroPanel extends JPanel {
         features.setBackground(new Color(245, 245, 245));
         features.setEditable(false);
         features.setFocusable(false);
+        features.setOpaque(false);
         features.setBorder(null);
         features.setBounds(centerX - 125, 250, 700, 150);
         add(features);
 
         // Continue Button
         JButton continueButton = new JButton("Get Started");
-        continueButton.setBounds(centerX - 125, centerY + 50, 250, 55);
+        continueButton.setBounds(centerX - 125, centerY - 50, 250, 55);
         continueButton.setFont(new Font("SansSerif", Font.BOLD, 16));
         continueButton.setBackground(new Color(100, 200, 150));
         continueButton.setForeground(Color.WHITE);
@@ -74,5 +73,15 @@ public class IntroPanel extends JPanel {
 
     }
 
-    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Load the background image
+        Image bgImage = new ImageIcon("background.png").getImage();
+
+        // Draw it to fill the entire panel
+        g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
+    }
+
 }
