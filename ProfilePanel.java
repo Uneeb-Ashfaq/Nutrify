@@ -12,10 +12,11 @@ public class ProfilePanel extends JPanel {
         setLayout(null);
         setBackground(new Color(245, 245, 245));
 
+        
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int centerX = screenSize.width / 2;
-        int startY = 50;
 
+        // Step 1 of 2 Text
         JLabel stepLabel = new JLabel("Step 1 of 2");
         stepLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
         stepLabel.setForeground(new Color(46, 204, 113));
@@ -31,91 +32,88 @@ public class ProfilePanel extends JPanel {
         headerText.setBounds(centerX - 300, 50, 600, 50);
         add(headerText);
 
-        int labelX = centerX - 400;
-        int fieldX = centerX - 150;
-
         // First Name
         JLabel firstName = new JLabel("First Name:");
         firstName.setFont(new Font("SansSerif", Font.BOLD, 16));
-        firstName.setBounds(labelX, 170 , 200, 30);
+        firstName.setBounds(centerX - 400, 170 , 200, 30);
         add(firstName);
-
+       
         JTextField firstNameText = new JTextField();
-        firstNameText.setBounds(fieldX, 170 , 450, 40);
+        firstNameText.setBounds(centerX - 150, 170 , 450, 40);
         firstNameText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(firstNameText);
 
         // Last Name
         JLabel lastName = new JLabel("Last Name:");
         lastName.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lastName.setBounds(labelX, startY + 180, 200, 30);
+        lastName.setBounds(centerX - 400, 230, 200, 30);
         add(lastName);
 
         JTextField lastNameText = new JTextField();
-        lastNameText.setBounds(fieldX, startY + 180, 450, 40);
+        lastNameText.setBounds(centerX - 150, 230 , 450, 40);
         lastNameText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(lastNameText);
 
         // Age
         JLabel age = new JLabel("Age:");
         age.setFont(new Font("SansSerif", Font.BOLD, 16));
-        age.setBounds(labelX, startY + 240, 200, 30);
+        age.setBounds(centerX - 400, 290 , 200, 30);
         add(age);
 
         JTextField ageText = new JTextField();
-        ageText.setBounds(fieldX, startY + 240, 450, 40);
+        ageText.setBounds(centerX - 150,  290, 450, 40);
         ageText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(ageText);
 
         // Gender
         JLabel gender = new JLabel("Gender:");
         gender.setFont(new Font("SansSerif", Font.BOLD, 16));
-        gender.setBounds(labelX, startY + 300, 200, 30);
+        gender.setBounds(centerX - 400, 350 , 200, 30);
         add(gender);
 
         String[] genderOptions = { "Select", "Male", "Female" };
         JComboBox<String> genderCombo = new JComboBox<>(genderOptions);
-        genderCombo.setBounds(fieldX, startY + 300, 450, 40);
+        genderCombo.setBounds(centerX - 150, 350 , 450, 40);
         genderCombo.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(genderCombo);
 
         // Height
         JLabel height = new JLabel("Height (cm):");
         height.setFont(new Font("SansSerif", Font.BOLD, 16));
-        height.setBounds(labelX, startY + 360, 200, 30);
+        height.setBounds(centerX - 400,   410, 200, 30);
         add(height);
 
         JTextField heightText = new JTextField();
-        heightText.setBounds(fieldX, startY + 360, 450, 40);
+        heightText.setBounds(centerX - 150, 410 , 450, 40);
         heightText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(heightText);
 
         // Weight
         JLabel weight = new JLabel("Weight (kg):");
         weight.setFont(new Font("SansSerif", Font.BOLD, 16));
-        weight.setBounds(labelX, startY + 420, 200, 30);
+        weight.setBounds(centerX - 400,  470, 200, 30);
         add(weight);
 
         JTextField weightText = new JTextField();
-        weightText.setBounds(fieldX, startY + 420, 450, 40);
+        weightText.setBounds(centerX - 150, 470 , 450, 40);
         weightText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(weightText);
 
         // Activity Level
         JLabel activityLevel = new JLabel("Activity Level:");
         activityLevel.setFont(new Font("SansSerif", Font.BOLD, 16));
-        activityLevel.setBounds(labelX, startY + 480, 200, 30);
+        activityLevel.setBounds(centerX - 400,   530, 200, 30);
         add(activityLevel);
 
         String[] activityLevelOptions = { "Select", "Light", "Moderate", "Active", "Very Active" };
         JComboBox<String> activityLevelCombo = new JComboBox<>(activityLevelOptions);
-        activityLevelCombo.setBounds(fieldX, startY + 480, 450, 40);
+        activityLevelCombo.setBounds(centerX - 150, 530 , 450, 40);
         activityLevelCombo.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(activityLevelCombo);
 
         // Continue Button
         JButton continueButton = new JButton("Continue");
-        continueButton.setBounds(centerX - 140, startY + 560, 280, 60);
+        continueButton.setBounds(centerX - 140, 600, 280, 60);
         continueButton.setFont(new Font("SansSerif", Font.BOLD, 18));
         continueButton.setBackground(new Color(100, 200, 150));
         continueButton.setForeground(Color.WHITE);
@@ -130,7 +128,6 @@ public class ProfilePanel extends JPanel {
             public void mouseEntered(MouseEvent e) {
                 continueButton.setBackground(new Color(80, 180, 130));
             }
-
             public void mouseExited(MouseEvent e) {
                 continueButton.setBackground(new Color(100, 200, 150));
             }
@@ -145,11 +142,9 @@ public class ProfilePanel extends JPanel {
             String weightInput = weightText.getText().trim();
             String activityInput = (String) activityLevelCombo.getSelectedItem();
 
-            if (firstNameInput.isEmpty() || lastNameInput.isEmpty() || ageInput.isEmpty() ||
-                    heightInput.isEmpty() || weightInput.isEmpty() ||
-                    genderInput.equals("Select") || activityInput.equals("Select")) {
-                JOptionPane.showMessageDialog(ProfilePanel.this, "Please fill in all fields!",
-                        "Error", JOptionPane.ERROR_MESSAGE);
+            // make sure fields are all full 
+            if (firstNameInput.isEmpty() || lastNameInput.isEmpty() || ageInput.isEmpty() || heightInput.isEmpty() || weightInput.isEmpty() ||genderInput.equals("Select") || activityInput.equals("Select")) {
+                JOptionPane.showMessageDialog(ProfilePanel.this, "Please fill in all fields!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -188,9 +183,7 @@ public class ProfilePanel extends JPanel {
                 app.showGoalPanel();
 
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(ProfilePanel.this,
-                        "Age, height, and weight must be valid numbers.",
-                        "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(ProfilePanel.this, "Age, height, and weight must be valid numbers.", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         });
