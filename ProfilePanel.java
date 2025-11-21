@@ -20,7 +20,7 @@ public class ProfilePanel extends JPanel {
         stepLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
         stepLabel.setForeground(new Color(46, 204, 113));
         stepLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        stepLabel.setBounds(0, startY - 20, screenSize.width, 20);
+        stepLabel.setBounds(0, 30, screenSize.width, 20);
         add(stepLabel);
 
         // HEADER
@@ -28,7 +28,7 @@ public class ProfilePanel extends JPanel {
         headerText.setFont(new Font("SansSerif", Font.BOLD, 40));
         headerText.setForeground(new Color(50, 50, 50));
         headerText.setHorizontalAlignment(SwingConstants.CENTER);
-        headerText.setBounds(centerX - 300, startY, 600, 50);
+        headerText.setBounds(centerX - 300, 50, 600, 50);
         add(headerText);
 
         int labelX = centerX - 400;
@@ -37,11 +37,11 @@ public class ProfilePanel extends JPanel {
         // First Name
         JLabel firstName = new JLabel("First Name:");
         firstName.setFont(new Font("SansSerif", Font.BOLD, 16));
-        firstName.setBounds(labelX, startY + 120, 200, 30);
+        firstName.setBounds(labelX, 170 , 200, 30);
         add(firstName);
 
         JTextField firstNameText = new JTextField();
-        firstNameText.setBounds(fieldX, startY + 120, 450, 40);
+        firstNameText.setBounds(fieldX, 170 , 450, 40);
         firstNameText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(firstNameText);
 

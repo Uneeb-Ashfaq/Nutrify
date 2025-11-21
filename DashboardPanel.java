@@ -10,14 +10,12 @@ public class DashboardPanel extends JPanel {
     public DashboardPanel(GUI app) {
         this.app = app;
         setLayout(null);
-        setBackground(new Color(240, 248, 245));
+        setBackground(new Color(245, 245, 245));
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenW = screenSize.width;
 
-        // =======================
-        // Header (centered)
-        // =======================
+        // Header 
         JLabel welcomeLabel = new JLabel("Welcome back, " + app.getUserProfile().getFirstName() + "! 👋");
         welcomeLabel.setFont(new Font("SansSerif", Font.BOLD, 36));
         welcomeLabel.setForeground(new Color(40, 40, 40));
@@ -32,17 +30,13 @@ public class DashboardPanel extends JPanel {
         dateLabel.setBounds(0, 90, screenW, 25);
         add(dateLabel);
 
-        // =======================
-        // Today's calories
-        // =======================
+
         todayCalories = 0;
         for (Meal meal : app.getMeals()) {
             todayCalories += meal.getCalories() * meal.getServingAmount();
         }
 
-        // =======================
-        // Stat cards row (3 cards centered)
-        // =======================
+ 
         int cardY = 140;
         int cardWidth = 340;
         int cardSpacing = 30;
@@ -51,7 +45,7 @@ public class DashboardPanel extends JPanel {
 
         // Card 1: Today’s Calories
         JPanel calorieCard = createStatCard(
-                "🍽️ Today's Calories",
+                "Today's Calories",
                 String.format("%.0f / %.0f kcal", todayCalories, app.getUserGoal().getDailyCalorieGoal()),
                 String.format("%.0f remaining",
                         Math.max(0, app.getUserGoal().getDailyCalorieGoal() - todayCalories)),
@@ -68,7 +62,7 @@ public class DashboardPanel extends JPanel {
                 app.getUserGoal().getGoalType().equals("Gain") ? "to gain" : "to maintain";
 
         JPanel goalCard = createStatCard(
-                "🎯 Goal Progress",
+                "Goal Progress",
                 String.format("%.1f kg %s", remaining, goalText),
                 app.getUserGoal().getMonths() + " months remaining",
                 new Color(232, 245, 253),
@@ -79,7 +73,7 @@ public class DashboardPanel extends JPanel {
 
         // Card 3: Activity Level
         JPanel activityCard = createStatCard(
-                "💪 Activity Level",
+                "Activity Level",
                 app.getUserProfile().getActivityLevel(),
                 "Current level",
                 new Color(232, 245, 233),
@@ -99,7 +93,7 @@ public class DashboardPanel extends JPanel {
         int contentStartX = (screenW - totalContentWidth) / 2;
 
         // Profile header + box
-        JLabel profileHeader = new JLabel("📊 Your Profile");
+        JLabel profileHeader = new JLabel("Your Profile");
         profileHeader.setFont(new Font("SansSerif", Font.BOLD, 22));
         profileHeader.setForeground(new Color(50, 50, 50));
         profileHeader.setBounds(contentStartX, contentY, 300, 30);
@@ -147,7 +141,7 @@ public class DashboardPanel extends JPanel {
         // Meals header + box
         int mealsX = contentStartX + profileWidth + columnsSpacing;
 
-        JLabel mealsHeader = new JLabel("📝 Today's Meals");
+        JLabel mealsHeader = new JLabel("Today's Meals");
         mealsHeader.setFont(new Font("SansSerif", Font.BOLD, 22));
         mealsHeader.setForeground(new Color(50, 50, 50));
         mealsHeader.setBounds(mealsX, contentY, 300, 30);
@@ -215,7 +209,14 @@ public class DashboardPanel extends JPanel {
         editProfileBtn.setBounds(btnStartX + (btnWidth + btnSpacing) * 2, btnY, btnWidth, btnHeight);
         editProfileBtn.addActionListener(e -> app.showProfilePanel());
         add(editProfileBtn);
+
+        JButton chatbot = createActionButton("⚙️ Talk to chatbot!", new Color(100, 100, 100));
+        chatbot.setBounds(btnStartX + (btnWidth + btnSpacing) * 3, btnY, btnWidth, btnHeight);
+        chatbot.addActionListener(e -> app.showChatBotPanel());
+        add(chatbot);
     }
+
+
 
     // ===== helper: stat card =====
     private JPanel createStatCard(String title, String mainValue, String subValue,

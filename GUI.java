@@ -18,6 +18,7 @@ public class GUI {
     private GoalPanel goalPanel;
     private AddMealPanel addMealPanel;
     private DashboardPanel dashboardPanel;
+    private ChatBotPanel  chatbotPanel;
 
     // ---------------------------------------------------------------------
 
@@ -36,7 +37,8 @@ public class GUI {
         profilePanel = new ProfilePanel(this);
         goalPanel = new GoalPanel(this);
         addMealPanel = new AddMealPanel(this);
-        dashboardPanel = new DashboardPanel(this);
+        chatbotPanel = new ChatBotPanel(this);
+ 
 
 
 
@@ -49,6 +51,7 @@ public class GUI {
     }
 
     public void showDashboard() {
+    dashboardPanel = new DashboardPanel(this);
     setContent(dashboardPanel);
     }
 
@@ -63,6 +66,9 @@ public class GUI {
         setContent(addMealPanel);
     }
 
+public void showChatBotPanel() {
+        setContent(chatbotPanel);
+    }
     private void setContent(JPanel panel) {
         frame.setContentPane(panel);
         frame.revalidate();

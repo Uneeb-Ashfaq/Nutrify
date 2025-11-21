@@ -100,6 +100,61 @@ public class AddMealPanel extends JPanel {
         });
 
 
+        continueButton.addActionListener(e -> {
+            String name = mealNameText.getText().trim();
+            String type = (String) mealTypeCombo.getSelectedItem();
+            String servingsStr = servingsText.getText().trim();
+            String caloriesStr = caloriesPerServingsText.getText().trim();
+
+            if (name.isEmpty() || servingsStr.isEmpty() || caloriesStr.isEmpty() ||
+                type.equals("Select")) {
+                JOptionPane.showMessageDialog(
+                        AddMealPanel.this,
+                        "Please fill in all fields and select a meal type.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            try {
+                double serving = Double.parseDouble(servingsStr);
+                double caloriesPerServing = Double.parseDouble(caloriesStr);
+
+                if (serving <= 0 || caloriesPerServing <= 0) {
+                    JOptionPane.showMessageDialog(
+                            AddMealPanel.this,
+                            "Servings and calories must be positive numbers.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    ); 
+                    return;
+                }
+
+                Meal meal = new Meal(type, name, serving, caloriesPerServing);
+                app.getMeals().add(meal);
+
+                JOptionPane.showMessageDialog(
+                        AddMealPanel.this,
+                        String.format("Meal saved:\n%s (%.1f servings, %.0f kcal per serving)",
+                                      name, servings, caloriesPerServing),
+                        "Meal Logged",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+                app.showDashboard();
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(
+                        AddMealPanel.this,
+                        "Servings and calories must be valid numbers.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+        });
+
+
         // Cancel Button
         JButton cancelButton = new JButton("Cancel");
         cancelButton.setBounds(centerX - 140, startY + 500, 280, 50);
@@ -121,6 +176,10 @@ public class AddMealPanel extends JPanel {
                 cancelButton.setBackground(new Color(200, 80, 80));
             }
         });
+
+
+
+
 
         // Action → go back to home page
         cancelButton.addActionListener(e -> app.showDashboard());

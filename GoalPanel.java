@@ -144,3 +144,4 @@ public class GoalPanel extends JPanel {
 
     }
 }
+
