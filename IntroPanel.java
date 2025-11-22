@@ -33,8 +33,8 @@ public class IntroPanel extends JPanel {
 
         JTextArea features = new JTextArea(
                 "• Track Daily Calories & Meals\n\n" +
-                    "• Set & Achieve Personal Goals\n\n" +
-                    "• Monitor Your Progress Over Time");
+                        "• Set & Achieve Personal Goals\n\n" +
+                        "• Monitor Your Progress Over Time");
         features.setFont(new Font("SansSerif", Font.PLAIN, 18));
         features.setForeground(new Color(80, 80, 80));
         features.setBackground(new Color(245, 245, 245));
@@ -62,6 +62,7 @@ public class IntroPanel extends JPanel {
             public void mouseEntered(MouseEvent e) {
                 continueButton.setBackground(new Color(80, 180, 130));
             }
+
             public void mouseExited(MouseEvent e) {
                 continueButton.setBackground(new Color(100, 200, 150));
             }
@@ -77,7 +78,7 @@ public class IntroPanel extends JPanel {
         super.paintComponent(g);
 
         // Load the background image
-        Image bgImage = new ImageIcon("background.png").getImage();
+        Image bgImage = new ImageIcon("introPanelBG.png").getImage();
 
         // Draw it to fill the entire panel
         g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);

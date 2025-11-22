@@ -35,7 +35,7 @@ public class ProfilePanel extends JPanel {
         // First Name
         JLabel firstName = new JLabel("First Name:");
         firstName.setFont(new Font("SansSerif", Font.BOLD, 16));
-        firstName.setBounds(centerX - 400, 170 , 200, 30);
+        firstName.setBounds(centerX - 350, 170 , 200, 30);
         add(firstName);
        
         JTextField firstNameText = new JTextField();
@@ -46,7 +46,7 @@ public class ProfilePanel extends JPanel {
         // Last Name
         JLabel lastName = new JLabel("Last Name:");
         lastName.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lastName.setBounds(centerX - 400, 230, 200, 30);
+        lastName.setBounds(centerX - 350, 230, 200, 30);
         add(lastName);
 
         JTextField lastNameText = new JTextField();
@@ -57,7 +57,7 @@ public class ProfilePanel extends JPanel {
         // Age
         JLabel age = new JLabel("Age:");
         age.setFont(new Font("SansSerif", Font.BOLD, 16));
-        age.setBounds(centerX - 400, 290 , 200, 30);
+        age.setBounds(centerX - 350, 290 , 200, 30);
         add(age);
 
         JTextField ageText = new JTextField();
@@ -68,7 +68,7 @@ public class ProfilePanel extends JPanel {
         // Gender
         JLabel gender = new JLabel("Gender:");
         gender.setFont(new Font("SansSerif", Font.BOLD, 16));
-        gender.setBounds(centerX - 400, 350 , 200, 30);
+        gender.setBounds(centerX - 350, 350 , 200, 30);
         add(gender);
 
         String[] genderOptions = { "Select", "Male", "Female" };
@@ -80,7 +80,7 @@ public class ProfilePanel extends JPanel {
         // Height
         JLabel height = new JLabel("Height (cm):");
         height.setFont(new Font("SansSerif", Font.BOLD, 16));
-        height.setBounds(centerX - 400,   410, 200, 30);
+        height.setBounds(centerX - 350,   410, 200, 30);
         add(height);
 
         JTextField heightText = new JTextField();
@@ -91,7 +91,7 @@ public class ProfilePanel extends JPanel {
         // Weight
         JLabel weight = new JLabel("Weight (kg):");
         weight.setFont(new Font("SansSerif", Font.BOLD, 16));
-        weight.setBounds(centerX - 400,  470, 200, 30);
+        weight.setBounds(centerX - 350,  470, 200, 30);
         add(weight);
 
         JTextField weightText = new JTextField();
@@ -102,7 +102,7 @@ public class ProfilePanel extends JPanel {
         // Activity Level
         JLabel activityLevel = new JLabel("Activity Level:");
         activityLevel.setFont(new Font("SansSerif", Font.BOLD, 16));
-        activityLevel.setBounds(centerX - 400,   530, 200, 30);
+        activityLevel.setBounds(centerX - 350,   530, 200, 30);
         add(activityLevel);
 
         String[] activityLevelOptions = { "Select", "Light", "Moderate", "Active", "Very Active" };
@@ -191,4 +191,15 @@ public class ProfilePanel extends JPanel {
         add(continueButton);
 
     }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Load the background image
+        Image bgImage = new ImageIcon("bg.png").getImage();
+
+        // Draw it to fill the entire panel
+        g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
+    }
+
 }

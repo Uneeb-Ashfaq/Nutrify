@@ -30,7 +30,7 @@ public class GoalPanel extends JPanel {
         // Goal Type
         JLabel goalTypeLabel = new JLabel("Goal Type:");
         goalTypeLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
-        goalTypeLabel.setBounds(centerX - 400, 200, 200, 30);
+        goalTypeLabel.setBounds(centerX - 350, 200, 200, 30);
         add(goalTypeLabel);
 
         String[] goalOptions = { "Select", "Lose", "Maintain", "Gain" };
@@ -43,7 +43,7 @@ public class GoalPanel extends JPanel {
         // Target Weight
         JLabel targetWeight = new JLabel("Target Weight (kg):");
         targetWeight.setFont(new Font("SansSerif", Font.BOLD, 16));
-        targetWeight.setBounds(centerX - 400, 270, 200, 30);
+        targetWeight.setBounds(centerX - 350, 270, 200, 30);
         add(targetWeight);
 
         JTextField targetWeightText = new JTextField();
@@ -54,7 +54,7 @@ public class GoalPanel extends JPanel {
         // Time Frame
         JLabel timeFrame = new JLabel("Time Frame (months):");
         timeFrame.setFont(new Font("SansSerif", Font.BOLD, 16));
-        timeFrame.setBounds(centerX - 400, 340, 200, 30);
+        timeFrame.setBounds(centerX - 350, 340, 200, 30);
         add(timeFrame);
 
         JTextField timeFrameText = new JTextField();
@@ -131,5 +131,16 @@ public class GoalPanel extends JPanel {
 
         add(continueButton);
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Load the background image
+        Image bgImage = new ImageIcon("bg.png").getImage();
+
+        // Draw it to fill the entire panel
+        g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
     }
 }

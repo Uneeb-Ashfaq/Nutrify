@@ -13,21 +13,20 @@ public class DashboardPanel extends JPanel {
         setBackground(new Color(245, 245, 245));
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenW = screenSize.width;
 
         // Header 
         JLabel welcomeLabel = new JLabel("Welcome back, " + app.getUserProfile().getFirstName() + "! 👋");
         welcomeLabel.setFont(new Font("SansSerif", Font.BOLD, 36));
         welcomeLabel.setForeground(new Color(40, 40, 40));
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        welcomeLabel.setBounds(0, 40, screenW, 50);
+        welcomeLabel.setBounds(0, 40, screenSize.width, 50);
         add(welcomeLabel);
 
         JLabel dateLabel = new JLabel(LocalDate.now().toString());
         dateLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
         dateLabel.setForeground(new Color(120, 120, 120));
         dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        dateLabel.setBounds(0, 90, screenW, 25);
+        dateLabel.setBounds(0, 90, screenSize.width, 25);
         add(dateLabel);
 
 
@@ -37,22 +36,17 @@ public class DashboardPanel extends JPanel {
         }
 
  
-        int cardY = 140;
-        int cardWidth = 340;
-        int cardSpacing = 30;
-        int totalCardsWidth = cardWidth * 3 + cardSpacing * 2;
-        int cardsStartX = (screenW - totalCardsWidth) / 2;
+        int cardsStartX = (screenSize.width - 1080) / 2;
 
         // Card 1: Today’s Calories
         JPanel calorieCard = createStatCard(
                 "Today's Calories",
                 String.format("%.0f / %.0f kcal", todayCalories, app.getUserGoal().getDailyCalorieGoal()),
                 String.format("%.0f remaining",
-                        Math.max(0, app.getUserGoal().getDailyCalorieGoal() - todayCalories)),
+                Math.max(0, app.getUserGoal().getDailyCalorieGoal() - todayCalories)),
                 new Color(255, 243, 224),
-                new Color(255, 183, 77)
-        );
-        calorieCard.setBounds(cardsStartX, cardY, cardWidth, 160);
+                new Color(255, 183, 77));
+        calorieCard.setBounds(cardsStartX, 140, 340, 160);
         add(calorieCard);
 
         // Card 2: Goal Progress
@@ -68,7 +62,7 @@ public class DashboardPanel extends JPanel {
                 new Color(232, 245, 253),
                 new Color(66, 165, 245)
         );
-        goalCard.setBounds(cardsStartX + cardWidth + cardSpacing, cardY, cardWidth, 160);
+        goalCard.setBounds(cardsStartX + 370, 140, 340, 160);
         add(goalCard);
 
         // Card 3: Activity Level
@@ -79,34 +73,29 @@ public class DashboardPanel extends JPanel {
                 new Color(232, 245, 233),
                 new Color(102, 187, 106)
         );
-        activityCard.setBounds(cardsStartX + (cardWidth + cardSpacing) * 2, cardY, cardWidth, 160);
+        activityCard.setBounds(cardsStartX + 740, 140, 340, 160);
         add(activityCard);
 
         // =======================
         // Profile + Meals columns (centered as block)
         // =======================
-        int contentY = cardY + 190;
-        int profileWidth = 520;
-        int mealsWidth = 480;
-        int columnsSpacing = 40;
-        int totalContentWidth = profileWidth + mealsWidth + columnsSpacing;
-        int contentStartX = (screenW - totalContentWidth) / 2;
+        int contentStartX = (screenSize.width - 1040) / 2;
 
         // Profile header + box
         JLabel profileHeader = new JLabel("Your Profile");
         profileHeader.setFont(new Font("SansSerif", Font.BOLD, 22));
         profileHeader.setForeground(new Color(50, 50, 50));
-        profileHeader.setBounds(contentStartX, contentY, 300, 30);
+        profileHeader.setBounds(contentStartX, 330, 300, 30);
         add(profileHeader);
 
         JPanel profileBox = new JPanel();
         profileBox.setLayout(null);
         profileBox.setBackground(Color.WHITE);
         profileBox.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 2));
-        profileBox.setBounds(contentStartX, contentY + 40, profileWidth, 280);
+        profileBox.setBounds(contentStartX, 370, 520, 280);
 
         JTextArea profileText = new JTextArea();
-        profileText.setBounds(20, 20, profileWidth - 40, 240);
+        profileText.setBounds(20, 20, 480, 240);
         profileText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         profileText.setBackground(Color.WHITE);
         profileText.setEditable(false);
@@ -139,19 +128,19 @@ public class DashboardPanel extends JPanel {
         add(profileBox);
 
         // Meals header + box
-        int mealsX = contentStartX + profileWidth + columnsSpacing;
+        int mealsX = contentStartX + 560;
 
         JLabel mealsHeader = new JLabel("Today's Meals");
         mealsHeader.setFont(new Font("SansSerif", Font.BOLD, 22));
         mealsHeader.setForeground(new Color(50, 50, 50));
-        mealsHeader.setBounds(mealsX, contentY, 300, 30);
+        mealsHeader.setBounds(mealsX, 330, 300, 30);
         add(mealsHeader);
 
         JPanel mealsBox = new JPanel();
         mealsBox.setLayout(null);
         mealsBox.setBackground(Color.WHITE);
         mealsBox.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 2));
-        mealsBox.setBounds(mealsX, contentY + 40, mealsWidth, 280);
+        mealsBox.setBounds(mealsX, 370, 480, 280);
 
         if (app.getMeals().isEmpty()) {
             JLabel noMeals = new JLabel(
@@ -159,11 +148,11 @@ public class DashboardPanel extends JPanel {
             noMeals.setFont(new Font("SansSerif", Font.PLAIN, 16));
             noMeals.setForeground(new Color(150, 150, 150));
             noMeals.setHorizontalAlignment(SwingConstants.CENTER);
-            noMeals.setBounds(0, 80, mealsWidth, 100);
+            noMeals.setBounds(0, 80, 480, 100);
             mealsBox.add(noMeals);
         } else {
             JTextArea mealsText = new JTextArea();
-            mealsText.setBounds(20, 20, mealsWidth - 40, 240);
+            mealsText.setBounds(20, 20, 440, 240);
             mealsText.setFont(new Font("SansSerif", Font.PLAIN, 15));
             mealsText.setBackground(Color.WHITE);
             mealsText.setEditable(false);
@@ -182,7 +171,7 @@ public class DashboardPanel extends JPanel {
             }
             mealsText.setText(mealsList.toString());
             JScrollPane scrollPane = new JScrollPane(mealsText);
-            scrollPane.setBounds(20, 20, mealsWidth - 40, 240);
+            scrollPane.setBounds(20, 20, 440, 240);
             scrollPane.setBorder(null);
             scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -193,12 +182,12 @@ public class DashboardPanel extends JPanel {
         // =======================
         // Bottom buttons (3 centered)
         // =======================
-        int btnY = contentY + 350;
+        int btnY = 330 + 350;
         int btnWidth = 240;
         int btnHeight = 60;
         int btnSpacing = 40;
         int totalBtnWidth = btnWidth * 3 + btnSpacing * 2;
-        int btnStartX = (screenW - totalBtnWidth) / 2;
+        int btnStartX = (screenSize.width  - totalBtnWidth) / 2;
 
         JButton logMealBtn = createActionButton("+ Log Meal", new Color(46, 204, 113));
         logMealBtn.setBounds(btnStartX, btnY, btnWidth, btnHeight);
@@ -312,4 +301,16 @@ public class DashboardPanel extends JPanel {
                 JOptionPane.INFORMATION_MESSAGE
         );
     }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Load the background image
+        Image bgImage = new ImageIcon("dashboard.png").getImage();
+
+        // Draw it to fill the entire panel
+        g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
+    }
+
+
 }

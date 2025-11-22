@@ -23,7 +23,7 @@ public class AddMealPanel extends JPanel {
         // Meal Name
         JLabel mealName = new JLabel("Meal Name: ");
         mealName.setFont(new Font("SansSerif", Font.BOLD, 16));
-        mealName.setBounds(centerX - 400, 200 , 200, 30);
+        mealName.setBounds(centerX - 350, 200 , 200, 30);
         add(mealName);
 
         JTextField mealNameText = new JTextField();
@@ -34,7 +34,7 @@ public class AddMealPanel extends JPanel {
         // Meal Type
         JLabel mealType = new JLabel("Meal Type: ");
         mealType.setFont(new Font("SansSerif", Font.BOLD, 16));
-        mealType.setBounds(centerX - 400, 270, 200, 30);
+        mealType.setBounds(centerX - 350, 270, 200, 30);
         add(mealType);
 
         String[] mealTypeOptions = { "Select", "Breakfast", "Lunch", "Dinner", "Snack" };
@@ -47,7 +47,7 @@ public class AddMealPanel extends JPanel {
         // Meal Servings
         JLabel servings = new JLabel("Number of Servings:");
         servings.setFont(new Font("SansSerif", Font.BOLD, 16));
-        servings.setBounds(centerX - 400, 340, 200, 30);
+        servings.setBounds(centerX - 350, 340, 200, 30);
         add(servings);
 
         JTextField servingsText = new JTextField();
@@ -58,7 +58,7 @@ public class AddMealPanel extends JPanel {
         // Calories per serving
         JLabel caloriesPerServings = new JLabel("Calories per Serving: ");
         caloriesPerServings.setFont(new Font("SansSerif", Font.BOLD, 16));
-        caloriesPerServings.setBounds(centerX - 400, 410 , 200, 30);
+        caloriesPerServings.setBounds(centerX - 350, 410 , 200, 30);
         add(caloriesPerServings);
 
         JTextField caloriesPerServingsText = new JTextField();
@@ -146,5 +146,15 @@ public class AddMealPanel extends JPanel {
 
         add(cancelButton);
 
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Load the background image
+        Image bgImage = new ImageIcon("bg.png").getImage();
+
+        // Draw it to fill the entire panel
+        g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
