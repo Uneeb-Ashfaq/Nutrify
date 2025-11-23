@@ -18,7 +18,7 @@ public class SignupPanel extends JPanel {
         int centerX = screenSize.width / 2;
         int centerY = screenSize.height / 2;
 
-        JLabel headerText = new JLabel("Signup");
+        JLabel headerText = new JLabel("Sign Up");
         headerText.setFont(new Font("SansSerif", Font.BOLD, 40));
         headerText.setForeground(new Color(50, 50, 50));
         headerText.setHorizontalAlignment(SwingConstants.CENTER);
@@ -76,6 +76,11 @@ public class SignupPanel extends JPanel {
 
             if (emailVal.isEmpty() || passwordVal.isEmpty()) {
                 JOptionPane.showMessageDialog(SignupPanel.this, "Please fill in all fields!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (app.getRegisteredEmail() != null && emailVal.equals(app.getRegisteredEmail())) {
+                JOptionPane.showMessageDialog(SignupPanel.this, "Email already in use, Please Login", "Error",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }

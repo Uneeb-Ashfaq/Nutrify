@@ -18,7 +18,7 @@ public class LoginPanel extends JPanel {
         int centerX = screenSize.width / 2;
         int centerY = screenSize.height / 2;
 
-        JLabel headerText = new JLabel("Login");
+        JLabel headerText = new JLabel("Log In");
         headerText.setFont(new Font("SansSerif", Font.BOLD, 40));
         headerText.setForeground(new Color(50, 50, 50));
         headerText.setHorizontalAlignment(SwingConstants.CENTER);
