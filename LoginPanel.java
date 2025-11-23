@@ -10,7 +10,6 @@ public class LoginPanel extends JPanel {
     public LoginPanel(GUI app) {
         this.app = app;
 
-
         setLayout(null);
         setBackground(new Color(245, 245, 245)); // Light gray background
         setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
@@ -44,14 +43,13 @@ public class LoginPanel extends JPanel {
         add(password);
 
         JPasswordField passwordText = new JPasswordField();
-        passwordText.setBounds(centerX - 150, 230 , 450, 40);
+        passwordText.setBounds(centerX - 150, 230, 450, 40);
         passwordText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(passwordText);
 
-
         // Continue Button
         JButton continueButton = new JButton("Login");
-        continueButton.setBounds(centerX - 125, centerY - 50, 250, 55);
+        continueButton.setBounds(centerX - 140, centerY - 50, 280, 50);
         continueButton.setFont(new Font("SansSerif", Font.BOLD, 16));
         continueButton.setBackground(new Color(100, 200, 150));
         continueButton.setForeground(Color.WHITE);
@@ -72,34 +70,65 @@ public class LoginPanel extends JPanel {
             }
         });
 
-
         continueButton.addActionListener(e -> {
             String usernameValue = usernameText.getText().trim();
             String passwordValue = new String(passwordText.getPassword()).trim();
 
             if (usernameValue.isEmpty() || passwordValue.isEmpty()) {
-                JOptionPane.showMessageDialog(LoginPanel.this, "Please fill in both username and password!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(LoginPanel.this, "Please fill in both username and password!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
-                String savedEmail = app.getRegisteredEmail();
-                String savedPass = app.getRegisteredPassword();
+            String savedEmail = app.getRegisteredEmail();
+            String savedPass = app.getRegisteredPassword();
 
             if (savedEmail == null || savedPass == null) {
-                JOptionPane.showMessageDialog(LoginPanel.this,"No account found. Please sign up first.","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(LoginPanel.this, "No account found. Please sign up first.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             // Compare text using .equals()
             if (!usernameValue.equals(savedEmail) || !passwordValue.equals(savedPass)) {
-                JOptionPane.showMessageDialog(LoginPanel.this, "Incorrect username or password!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(LoginPanel.this, "Incorrect username or password!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
-                
-            app.showProfilePanel();
-            });
 
-            add(continueButton);
+            app.showProfilePanel();
+        });
+
+        add(continueButton);
+
+        // Cancel Button
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(centerX - 140, 500, 280, 50);
+        backButton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        backButton.setBackground(new Color(200, 80, 80));
+        backButton.setForeground(Color.WHITE);
+        backButton.setFocusPainted(false);
+        backButton.setOpaque(true);
+        backButton.setContentAreaFilled(true);
+        backButton.setBorder(BorderFactory.createEmptyBorder());
+        backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Hover effect
+        backButton.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                backButton.setBackground(new Color(180, 60, 60));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                backButton.setBackground(new Color(200, 80, 80));
+            }
+        });
+
+        backButton.addActionListener(e -> app.showIntroPanel());
+
+        add(backButton);
+
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

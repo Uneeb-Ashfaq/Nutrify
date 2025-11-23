@@ -36,7 +36,6 @@ public class SignupPanel extends JPanel {
         emailText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(emailText);
 
-
         // Last Name
         JLabel password = new JLabel("Password:");
         password.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -44,14 +43,13 @@ public class SignupPanel extends JPanel {
         add(password);
 
         JPasswordField passwordText = new JPasswordField();
-        passwordText.setBounds(centerX - 150, 230 , 450, 40);
+        passwordText.setBounds(centerX - 150, 230, 450, 40);
         passwordText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(passwordText);
 
-
         // signup Button
         JButton signupButton = new JButton("Create Account");
-        signupButton.setBounds(centerX - 125, centerY - 50, 250, 55);
+        signupButton.setBounds(centerX - 140, centerY - 50, 280, 50);
         signupButton.setFont(new Font("SansSerif", Font.BOLD, 16));
         signupButton.setBackground(new Color(100, 200, 150));
         signupButton.setForeground(Color.WHITE);
@@ -72,27 +70,57 @@ public class SignupPanel extends JPanel {
             }
         });
 
-
         signupButton.addActionListener(e -> {
             String emailVal = emailText.getText().trim();
             String passwordVal = new String(passwordText.getPassword()).trim();
 
             if (emailVal.isEmpty() || passwordVal.isEmpty()) {
-                JOptionPane.showMessageDialog(SignupPanel.this, "Please fill in all fields!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(SignupPanel.this, "Please fill in all fields!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (!emailVal.contains("@") || !emailVal.contains(".")) {
-                JOptionPane.showMessageDialog(SignupPanel.this,"Please enter a valid email address.","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(SignupPanel.this, "Please enter a valid email address.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
-                }
+            }
 
-                app.setRegisteredCredentials(emailVal, passwordVal);
+            app.setRegisteredCredentials(emailVal, passwordVal);
 
-                JOptionPane.showMessageDialog(SignupPanel.this,"Account created successfully!","Success",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(SignupPanel.this, "Account created successfully!", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
             app.showProfilePanel();
-            });
+        });
 
-            add(signupButton);
+        add(signupButton);
+
+        // Cancel Button
+        JButton backButton = new JButton("Back");
+        backButton.setBounds(centerX - 140, 500, 280, 50);
+        backButton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        backButton.setBackground(new Color(200, 80, 80));
+        backButton.setForeground(Color.WHITE);
+        backButton.setFocusPainted(false);
+        backButton.setOpaque(true);
+        backButton.setContentAreaFilled(true);
+        backButton.setBorder(BorderFactory.createEmptyBorder());
+        backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Hover effect
+        backButton.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                backButton.setBackground(new Color(180, 60, 60));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                backButton.setBackground(new Color(200, 80, 80));
+            }
+        });
+
+        backButton.addActionListener(e -> app.showIntroPanel());
+
+        add(backButton);
+
     }
 
     @Override
