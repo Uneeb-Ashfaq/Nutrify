@@ -32,6 +32,8 @@ public class ProfilePanel extends JPanel {
         headerText.setBounds(centerX - 300, 50, 600, 50);
         add(headerText);
 
+        
+
         // First Name
         JLabel firstName = new JLabel("First Name:");
         firstName.setFont(new Font("SansSerif", Font.BOLD, 16));

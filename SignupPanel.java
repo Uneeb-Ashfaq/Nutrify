@@ -25,25 +25,32 @@ public class SignupPanel extends JPanel {
         headerText.setBounds(centerX - 300, 50, 600, 50);
         add(headerText);
 
+        JLabel subText = new JLabel("Create your account to start tracking your daily calories and goals.");
+        subText.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        subText.setForeground(new Color(90, 90, 90));
+        subText.setHorizontalAlignment(SwingConstants.CENTER);
+        subText.setBounds(centerX - 350, 110, 700, 30);
+        add(subText);
+        
         // email
         JLabel email = new JLabel("Email:");
         email.setFont(new Font("SansSerif", Font.BOLD, 16));
-        email.setBounds(centerX - 350, 170, 200, 30);
+        email.setBounds(centerX - 350, 230, 200, 30);
         add(email);
 
         JTextField emailText = new JTextField();
-        emailText.setBounds(centerX - 150, 170, 450, 40);
+        emailText.setBounds(centerX - 150, 230, 450, 40);
         emailText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(emailText);
 
         // Last Name
         JLabel password = new JLabel("Password:");
         password.setFont(new Font("SansSerif", Font.BOLD, 16));
-        password.setBounds(centerX - 350, 230, 200, 30);
+        password.setBounds(centerX - 350, 290, 200, 30);
         add(password);
 
         JPasswordField passwordText = new JPasswordField();
-        passwordText.setBounds(centerX - 150, 230, 450, 40);
+        passwordText.setBounds(centerX - 150, 290, 450, 40);
         passwordText.setFont(new Font("SansSerif", Font.PLAIN, 16));
         add(passwordText);
 

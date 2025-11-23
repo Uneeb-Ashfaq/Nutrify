@@ -21,6 +21,7 @@ public class GUI {
     private LoginPanel loginPanel;
     private GoalPanel goalPanel;
     private AddMealPanel addMealPanel;
+    private ResetPasswordPanel resetPasswordPanel;
     private ChatBotPanel chatbotPanel;
 
 
@@ -44,6 +45,7 @@ public class GUI {
         goalPanel = new GoalPanel(this);
         addMealPanel = new AddMealPanel(this);
         chatbotPanel = new ChatBotPanel(this);
+        resetPasswordPanel = new ResetPasswordPanel(this);
 
 
         showIntroPanel();
@@ -61,7 +63,13 @@ public class GUI {
 
     public void showSignupPanel() {
         setContent(new SignupPanel(this));
+
     }
+
+    public void showresetPassword() {
+        setContent(resetPasswordPanel);
+    }
+
     public void showDashboard() {
         setContent(new DashboardPanel(this));
     }
