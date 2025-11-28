@@ -116,8 +116,8 @@ public class AddMealPanel extends JPanel {
                     JOptionPane.showMessageDialog(AddMealPanel.this,"Servings and calories must be positive numbers.","Error",JOptionPane.ERROR_MESSAGE); 
                     return;
                 }
-                // Create LoggedMeal (polymorphism)
-                Meal meal = new LoggedMeal(type, name, serving, caloriesPerServing);
+                // Create meal (polymorphism)
+                Meal meal = new Meal(type, name, serving, caloriesPerServing);
                 app.getMeals().add(meal);  // Add to list
                 app.showDashboard();    // Go back home
 

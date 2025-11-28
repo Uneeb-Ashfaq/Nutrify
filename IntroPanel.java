@@ -23,7 +23,7 @@ public class IntroPanel extends JPanel {
         int centerY = screenSize.height / 2;
 
         // ========= Title =========
-        JLabel titleLabel = new JLabel("CalorieAppTracker");
+        JLabel titleLabel = new JLabel("Nutrify");
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 64));
         titleLabel.setForeground(new Color(30, 100, 60));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -61,7 +61,7 @@ public class IntroPanel extends JPanel {
         signupButton.setBackground(new Color(46, 204, 113));
         signupButton.setForeground(Color.WHITE);
         signupButton.setFocusPainted(false);
-        signupButton.setOpaque(true);
+        signupButton.setOpaque(true); 
         signupButton.setContentAreaFilled(true);
         signupButton.setBorder(BorderFactory.createEmptyBorder());
         signupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));

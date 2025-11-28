@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
 /**
  * LoginPanel
  * Handles user login by checking saved email and password.
@@ -138,7 +137,7 @@ public class LoginPanel extends JPanel {
 
         // ========= Back button =========
         JButton backButton = new JButton("Back");
-        backButton.setBounds(centerX - 140, 500, 280, 50);
+        backButton.setBounds(centerX - 140, 500 , 280, 50);
         backButton.setFont(new Font("SansSerif", Font.BOLD, 16));
         backButton.setBackground(new Color(200, 80, 80));
         backButton.setForeground(Color.WHITE);
@@ -164,6 +163,7 @@ public class LoginPanel extends JPanel {
         add(backButton);
 
     }
+
     /**
      * Paints background image on the panel.
      */

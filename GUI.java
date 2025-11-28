@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
+
 
 
 
@@ -14,12 +16,9 @@ import java.util.List;
 public class GUI {
     // Variables to store user data
     private JFrame frame;
-    
     private Profile userProfile;
     private Goal userGoal;
     private ArrayList<Meal> meals;
-
-    
     private String registeredEmail;
     private String registeredPassword;
 
@@ -38,7 +37,7 @@ public class GUI {
      * Constructs the GUI, initializes data and panels, and shows the intro screen.
      */
     public GUI() {
-        frame = new JFrame("CalorieAppTracker");
+        frame = new JFrame("Nutrify");
 
         // Create empty data objects
         userProfile = new Profile(); // Create empty profile
@@ -75,14 +74,10 @@ public class GUI {
 
     public void showLoginPanel() {
         setContent(new LoginPanel(this));    // Create fresh LoginPanel each time (so fields are cleared)
-
-
     }
 
     public void showSignupPanel() {
         setContent(new SignupPanel(this));        // Create fresh SignupPanel each time
-
-
     }
 
     public void showresetPassword() {

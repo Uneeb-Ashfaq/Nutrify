@@ -112,6 +112,7 @@ public class SignupPanel extends JPanel {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
             // Save email and password into the main app
             app.setRegisteredCredentials(emailVal, passwordVal);
             JOptionPane.showMessageDialog(SignupPanel.this, "Account created successfully!", "Success",JOptionPane.INFORMATION_MESSAGE);
